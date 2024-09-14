@@ -28,7 +28,9 @@ const nextConfig = {
     return config;
   },
 
-  // ...other config
+  // Configure static export for GitHub Pages
+  output: "export",
+  basePath: "/saas-light",
 };
 
 export default nextConfig;
