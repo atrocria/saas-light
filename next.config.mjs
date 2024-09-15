@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
+
+// Check if the environment is production
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig = {
   webpack(config) {
     // Grab the existing rule that handles SVG imports
@@ -28,8 +32,11 @@ const nextConfig = {
     return config;
   },
 
-  output: 'export', // Enables static export
-  basePath: '/saas-light', // Adjusts the base path for GitHub Pages
+  // Add the production check for GitHub Pages
+  assetPrefix: isProd ? "/saas-light/" : "", // Ensure assets are correctly prefixed in production
+  basePath: isProd ? "/saas-light" : "", // Set basePath for production deployment on GitHub Pages
+  trailingSlash: true, // Ensure pages use trailing slashes for proper static export
+  output: "export", // Ensure the app is built as a static site
 };
 
 export default nextConfig;
